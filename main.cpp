@@ -3,9 +3,11 @@
 #include <vector>
 using namespace std;
 
+struct point { int x,y; };
+
 class Map {
 
-    pair <int,int> mouse;
+    point mouse,cheese; // the location of mouse and cheese
     vector <vector<char>> map;
 
 public:
@@ -31,19 +33,31 @@ public:
 
     void go_mouse (){
 
-        // find the location of mouse
+        // finding the location of mouse and cheese
         for ( int i=0 ; i<map.size() ; i++ )            // row
             for ( int j=0 ; j<map[i].size() ; j++ )     // column
-                if ( map[i][j]=='M' ) { mouse.first=i; mouse.second=j; }
+                if ( map[i][j]=='M' ){
+                    mouse.x=i; mouse.y=j;               // mouse
+                } else if ( map[i][j]=='C' ){
+                    cheese.x=i; cheese.y=j;             // cheese
+                }
+
+        
+
+        // moving
+        if ( map[mouse.x+1][mouse.y] != '|' ){
+
+        }
     }
 
     void show_map (){
-        system("cls");                             
-        for ( int i=0 ; i<map.size() ; i++ ){      
+        system("cls"); 
+        for ( int i=0 ; i<map.size() ; i++ ){
             for ( int j=0 ; j<map[i].size() ; j++ )
                 cout << map[i][j];
             cout << endl;
         }
+        _sleep(500);
     }
 };
 
@@ -51,7 +65,7 @@ int main (){
     
 	Map maze("map.txt");
     //maze.show_map();
-    maze.go_mouse();
+    //maze.go_mouse();
 
 
     return 0;
