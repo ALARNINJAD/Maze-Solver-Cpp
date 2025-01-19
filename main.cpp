@@ -10,9 +10,7 @@ class Map {
     point mouse,cheese; // the location of mouse and cheese
     vector <vector<char>> map;
 
-public:
-
-    Map(string fileName) {
+    void read_file ( string fileName ){
 
         ifstream file(fileName); // open file on reading mode
         if ( !file.is_open() ) { cerr << "File error" << endl; } // error handling
@@ -31,7 +29,7 @@ public:
         file.close();
     }
 
-    void go_mouse (){
+    void find_locations (){
 
         // finding the location of mouse and cheese
         for ( int i=0 ; i<map.size() ; i++ )            // row
@@ -41,13 +39,21 @@ public:
                 } else if ( map[i][j]=='C' ){
                     cheese.x=i; cheese.y=j;             // cheese
                 }
+    }
 
-        
+    void separate (){
 
-        // moving
-        if ( map[mouse.x+1][mouse.y] != '|' ){
+        // separating the location of cheese/mouse from map
+        map[mouse.x][mouse.y] = '|';
+        map[cheese.x][cheese.y] = '|';
+    }
 
-        }
+public:
+
+    Map(string fileName) {
+        read_file(fileName);
+        find_locations();     
+        separate();
     }
 
     void show_map (){
@@ -65,8 +71,6 @@ int main (){
     
 	Map maze("map.txt");
     //maze.show_map();
-    //maze.go_mouse();
-
 
     return 0;
 }
