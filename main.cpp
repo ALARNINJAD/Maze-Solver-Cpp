@@ -5,6 +5,7 @@ using namespace std;
 
 class Map {
 
+    pair <int,int> mouse;
     vector <vector<char>> map;
 
 public:
@@ -28,9 +29,18 @@ public:
         file.close();
     }
 
+    void go_mouse (){
+
+        // find the location of mouse
+        for ( int i=0 ; i<map.size() ; i++ )            // row
+            for ( int j=0 ; j<map[i].size() ; j++ )     // column
+                if ( map[i][j]=='M' ) { mouse.first=i; mouse.second=j; }
+    }
+
     void show_map (){
-        for ( int i=0 ; i<map.size() ; i++ ){           // column
-            for ( int j=0 ; j<map[i].size() ; j++ )     // row
+        system("cls");                             
+        for ( int i=0 ; i<map.size() ; i++ ){      
+            for ( int j=0 ; j<map[i].size() ; j++ )
                 cout << map[i][j];
             cout << endl;
         }
@@ -40,8 +50,9 @@ public:
 int main (){
     
 	Map maze("map.txt");
+    //maze.show_map();
+    maze.go_mouse();
 
-    maze.show_map();
 
     return 0;
 }
