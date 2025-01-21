@@ -3,7 +3,13 @@
 #include <vector>
 using namespace std;
 
+#define RIGHT 0
+#define DOWN 1
+#define LEFT 2
+#define UP 3
+
 struct point { int x,y; };
+struct side { int loc; char c; };
 
 class Map {
 
@@ -41,29 +47,105 @@ class Map {
                 }
     }
 
-    void separate (){
+    // separating the location of cheese/mouse from map
+    void separate_mouse (){
+        map[mouse.x][mouse.y] = ' ';
+        map[cheese.x][cheese.y] = ' ';
+    }
 
-        // separating the location of cheese/mouse from map
-        map[mouse.x][mouse.y] = '|';
-        map[cheese.x][cheese.y] = '|';
+    void go (){
+
+        vector <point> diff_ways;
+
+        // moving mouse untill it finds the cheese
+        while ( mouse.x!=cheese.x || mouse.y!=cheese.y ){
+
+            side around[4]; // 4 different directions around the mouse
+            around[0].c = map[mouse.x][mouse.y+1];
+            around[0].loc = RIGHT;
+            around[1].c = map[mouse.x+1][mouse.y];
+            around[1].loc = DOWN;
+            around[2].c = map[mouse.x][mouse.y-1];
+            around[2].loc = LEFT;
+            around[3].c = map[mouse.x-1][mouse.y];
+            around[3].loc = UP;
+
+            int ways = 0;
+            for ( int i=0 ; i<4 ; i++ )            // count of ways
+                if ( around[i].c==' ' ) ways++;
+
+            int walls = 0;
+            for ( int i=0 ; i<4 ; i++ )            // count of walls
+                if ( around[i].c=='|' ) walls++;
+
+            if ( ways>1 ){
+                diff_ways.push_back(mouse);
+                map[mouse.x][mouse.y] = '*';
+            } else if ( ways==0 ){
+                map[mouse.x][mouse.y] = '.';
+                mouse = diff_ways.back();
+                diff_ways.pop_back();
+                continue;
+            }
+
+            // bubble sorting:
+            for ( bool condition=true ; condition ;){
+                condition = false;
+                for ( int i=0 ; i<3 ; i++ ){
+                    if ( (int)around[i].c > (int)around[i+1].c ){
+                        side temp;
+                        temp = around[i];
+                        around[i] = around[i+1];
+                        around[i+1] = temp;
+                        condition = true;
+                    }
+                }
+            }
+
+            if ( around[0].loc == RIGHT ){
+                if ( ways==1 )  
+                    map[mouse.x][mouse.y] = '.';
+                mouse.y++;
+            } else if ( around[0].loc == DOWN ){
+                if ( ways==1 )
+                    map[mouse.x][mouse.y] = '.';
+                mouse.x++;
+            } else if ( around[0].loc == LEFT ){
+                if ( ways==1 )
+                    map[mouse.x][mouse.y] = '.';
+                mouse.y--;
+            } else if ( around[0].loc == UP ){
+                if ( ways==1 )
+                    map[mouse.x][mouse.y] = '.';
+                mouse.x--;
+            }
+
+
+            show_map();
+        }
     }
 
 public:
 
     Map(string fileName) {
         read_file(fileName);
-        find_locations();     
-        separate();
+        find_locations();
+        separate_mouse();
+        go();
     }
 
     void show_map (){
-        system("cls"); 
-        for ( int i=0 ; i<map.size() ; i++ ){
-            for ( int j=0 ; j<map[i].size() ; j++ )
-                cout << map[i][j];
+        system("cls");                                  // clear frame
+        for ( int i=0 ; i<map.size() ; i++ ){           // row
+            for ( int j=0 ; j<map[i].size() ; j++ )     // column
+                if ( mouse.x==i && mouse.y==j ) {       // mouse
+                    cout << 'M';
+                } else if ( cheese.x==i && cheese.y==j ){
+                    cout << 'C';
+                } else { cout << map[i][j]; }           // walls and ways
             cout << endl;
         }
-        _sleep(500);
+        _sleep(200);                                    // for better view
     }
 };
 
@@ -74,3 +156,47 @@ int main (){
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bubble sorting:
+            // for ( bool condition=true ; condition ;){
+            //     condition = false;
+            //     for ( int i=0 ; i<3 ; i++ ){
+            //         if ( (int)around[i].c > (int)around[i+1].c ){
+            //             side temp;
+            //             temp = around[i];
+            //             around[i] = around[i+1];
+            //             around[i+1] = temp;
+            //             condition = true;
+            //         }
+            //     }
+            // }
+
+            // if ( around[0].loc == RIGHT ){
+            //     if ( ways==1 )  
+            //         map[mouse.x][mouse.y] = '.';
+            //     mouse.y++;
+            // } else if ( around[0].loc == DOWN ){
+            //     if ( ways==1 )
+            //         map[mouse.x][mouse.y] = '.';
+            //     mouse.x++;
+            // } else if ( around[0].loc == LEFT ){
+            //     if ( ways==1 )
+            //         map[mouse.x][mouse.y] = '.';
+            //     mouse.y--;
+            // } else if ( around[0].loc == UP ){
+            //     if ( ways==1 )
+            //         map[mouse.x][mouse.y] = '.';
+            //     mouse.x--;
+            // }
