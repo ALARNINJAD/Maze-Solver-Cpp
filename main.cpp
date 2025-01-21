@@ -71,20 +71,20 @@ class Map {
             around[3].loc = UP;
 
             int ways = 0;
-            for ( int i=0 ; i<4 ; i++ )            // count of ways
+            for ( int i=0 ; i<4 ; i++ )            // counting the ways
                 if ( around[i].c==' ' ) ways++;
 
             if ( ways>1 ){
-                diff_ways.push_back(mouse);
+                diff_ways.push_back(mouse);        // when new directions found
                 map[mouse.x][mouse.y] = '*';
             } else if ( ways==0 ){
-                map[mouse.x][mouse.y] = '.';
+                map[mouse.x][mouse.y] = '.';       // when ther is now way
                 mouse = diff_ways.back();
                 diff_ways.pop_back();
                 continue;
             }
 
-            // bubble sorting:
+            // bubble sorting directions:
             for ( bool condition=true ; condition ;){
                 condition = false;
                 for ( int i=0 ; i<3 ; i++ ){
@@ -98,6 +98,7 @@ class Map {
                 }
             }
 
+            // make a move
             if ( around[0].loc == RIGHT ){
                 if ( ways==1 )  
                     map[mouse.x][mouse.y] = '.';
@@ -116,8 +117,7 @@ class Map {
                 mouse.x--;
             }
 
-
-            show_map();
+            show_map();     // show frame
         }
     }
 
