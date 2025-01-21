@@ -152,51 +152,6 @@ public:
 int main (){
     
 	Map maze("map.txt");
-    //maze.show_map();
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// bubble sorting:
-            // for ( bool condition=true ; condition ;){
-            //     condition = false;
-            //     for ( int i=0 ; i<3 ; i++ ){
-            //         if ( (int)around[i].c > (int)around[i+1].c ){
-            //             side temp;
-            //             temp = around[i];
-            //             around[i] = around[i+1];
-            //             around[i+1] = temp;
-            //             condition = true;
-            //         }
-            //     }
-            // }
-
-            // if ( around[0].loc == RIGHT ){
-            //     if ( ways==1 )  
-            //         map[mouse.x][mouse.y] = '.';
-            //     mouse.y++;
-            // } else if ( around[0].loc == DOWN ){
-            //     if ( ways==1 )
-            //         map[mouse.x][mouse.y] = '.';
-            //     mouse.x++;
-            // } else if ( around[0].loc == LEFT ){
-            //     if ( ways==1 )
-            //         map[mouse.x][mouse.y] = '.';
-            //     mouse.y--;
-            // } else if ( around[0].loc == UP ){
-            //     if ( ways==1 )
-            //         map[mouse.x][mouse.y] = '.';
-            //     mouse.x--;
-            // }
