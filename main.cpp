@@ -48,7 +48,7 @@ class Map {
     }
 
     // separating the location of cheese/mouse from map
-    void separate_mouse (){
+    void separate (){
         map[mouse.x][mouse.y] = ' ';
         map[cheese.x][cheese.y] = ' ';
     }
@@ -126,7 +126,7 @@ public:
     Map(string fileName) {
         read_file(fileName);
         find_locations();
-        separate_mouse();
+        separate();
         go();
     }
 
