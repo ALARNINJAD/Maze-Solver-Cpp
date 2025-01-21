@@ -23,5 +23,4 @@ Default Map (you can draw your map in map.txt):
 |       ||||||| |||||      |||
 ||||||||||||||||||||||||||||||
 ```
-M is mouse
-C is cheese
+'M' is mouse, 'C' is cheese, ' ' is way, '|' is wall
