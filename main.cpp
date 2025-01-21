@@ -131,7 +131,7 @@ public:
     }
 
     void show_map (){
-        system("cls");                                  // clear frame
+        clear();                                  // clear frame
         for ( int i=0 ; i<map.size() ; i++ ){           // row
             for ( int j=0 ; j<map[i].size() ; j++ )     // column
                 if ( mouse.x==i && mouse.y==j ) {       // mouse
@@ -141,13 +141,27 @@ public:
                 } else { cout << map[i][j]; }           // walls and ways
             cout << endl;
         }
-        _sleep(200);                                    // for better view
+        sleep();                                    // for better view
     }
 };
 
-int main (){
-    
-	Map maze("map.txt");
+void clear (){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
 
+void sleep (){
+    #ifdef _WIN32
+        _sleep(200);
+    #else
+        usleep(200000);
+    #endif
+}
+
+int main (){
+	Map maze("map.txt");
     return 0;
 }
