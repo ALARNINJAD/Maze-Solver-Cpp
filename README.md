@@ -1,7 +1,7 @@
 # Maze-Solver-Cpp
 
 Default Map (you can draw your map in map.txt):
-
+```
 ||||||||||||||||||||||||||||||
 |M             |||     |||||||
 | |||||||| ||| ||||||| ||||||||||||||||||||||||
@@ -22,6 +22,6 @@ Default Map (you can draw your map in map.txt):
 ||||||| ||||||| |||||||||| |||
 |       ||||||| |||||      |||
 ||||||||||||||||||||||||||||||
-
+```
 M is mouse
 C is cheese
