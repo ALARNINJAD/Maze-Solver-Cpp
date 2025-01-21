@@ -74,10 +74,6 @@ class Map {
             for ( int i=0 ; i<4 ; i++ )            // count of ways
                 if ( around[i].c==' ' ) ways++;
 
-            int walls = 0;
-            for ( int i=0 ; i<4 ; i++ )            // count of walls
-                if ( around[i].c=='|' ) walls++;
-
             if ( ways>1 ){
                 diff_ways.push_back(mouse);
                 map[mouse.x][mouse.y] = '*';
