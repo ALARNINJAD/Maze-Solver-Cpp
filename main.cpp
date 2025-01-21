@@ -11,6 +11,22 @@ using namespace std;
 struct point { int x,y; };
 struct side { int loc; char c; };
 
+void clear (){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+void sleep (){
+    #ifdef _WIN32
+        _sleep(200);
+    #else
+        system("sleep 0.2");
+    #endif
+}
+
 class Map {
 
     point mouse,cheese; // the location of mouse and cheese
@@ -144,22 +160,6 @@ public:
         sleep();                                    // for better view
     }
 };
-
-void clear (){
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-}
-
-void sleep (){
-    #ifdef _WIN32
-        _sleep(200);
-    #else
-        usleep(200000);
-    #endif
-}
 
 int main (){
 	Map maze("map.txt");
