@@ -1,11 +1,15 @@
 #ifndef MAZE_HPP
 #define MAZE_HPP
 
+#include <iostream>
 #include <fstream>
 #include <vector>
-#include <./struct.hpp>
-#include <./function.hpp>
+#include <thread>
+#include <chrono>
 using namespace std;
+
+struct point { int x,y; };
+struct side { int loc; char c; };
 
 class Maze {
 
@@ -20,7 +24,7 @@ class Maze {
 public:
 
     Maze ( string fileName );
-    ~Maze ();
+    ~Maze (){};
 
     void show_map ();
 };

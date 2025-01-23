@@ -118,7 +118,11 @@ Maze::Maze(string fileName) {
 }
 
 void Maze::show_map (){
-    clear();                                  // clear frame
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
     for ( int i=0 ; i<map.size() ; i++ ){           // row
         for ( int j=0 ; j<map[i].size() ; j++ )     // column
             if ( mouse.x==i && mouse.y==j ) {       // mouse
@@ -128,5 +132,5 @@ void Maze::show_map (){
             } else { cout << map[i][j]; }           // walls and ways
         cout << endl;
     }
-    sleep();                                    // for better view
+    this_thread::sleep_for(chrono::milliseconds(200));
 }

@@ -1,3 +1,5 @@
 output.exe
 script.bat
 .vscode
+build
+CMakeLists.txt
