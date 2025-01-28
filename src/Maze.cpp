@@ -87,22 +87,18 @@ void Maze::go (){
             }
         }
 
-        // make a move
-        if ( around[0].loc == RIGHT ){
-            if ( ways==1 )  
+        // replace current location with '.'
+        if ( ways==1 )  
                 map[mouse.x][mouse.y] = '.';
+
+        // make a move 
+        if ( around[0].loc == RIGHT ){
             mouse.y++;
         } else if ( around[0].loc == DOWN ){
-            if ( ways==1 )
-                map[mouse.x][mouse.y] = '.';
             mouse.x++;
         } else if ( around[0].loc == LEFT ){
-            if ( ways==1 )
-                map[mouse.x][mouse.y] = '.';
             mouse.y--;
         } else if ( around[0].loc == UP ){
-            if ( ways==1 )
-                map[mouse.x][mouse.y] = '.';
             mouse.x--;
         }
 
